@@ -46,13 +46,22 @@ input {
   box-sizing: border-box;
 }
 form button {
+  display: block;
+  width: 100%;
   background: var(--blue);
+  font-weight: bold;
   border: 0;
   color: #fff;
   padding: 10px;
   font-family: "Inter";
   border-radius: 4px;
   cursor: pointer;
+  margin-bottom: 5px;
+}
+form button.guest {
+  background: #e7195a;
+  width: 100%;
+  font-weight: bold;
 }
 
 div.error {
@@ -93,6 +102,22 @@ form.signup, form.login {
   padding: 20px;
   background: #fff;
   border-radius: 4px;
+}
+form label.required:after {
+  content: " *";
+  color: red;
+}
+
+.input-container {
+  position: relative;
+}
+.input-container i {
+  position: absolute;
+  top: 7px;
+  right: 10px;
+}
+.input-container i:hover {
+  cursor: pointer;
 }
 
 /* navbar */

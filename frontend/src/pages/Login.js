@@ -38,6 +38,11 @@ const Login = () => {
 
             <button disabled={isLoading}>Log in</button>
             {error && <div className="error">{error}</div>}
+
+            <button className="guest" onClick={() => {
+                setEmail("guest@example.com");
+                setPassword("abcABC123!")
+            }}>Get Guest User Credentials</button>
         </form>
     )
 }
