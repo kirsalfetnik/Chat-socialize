@@ -38,4 +38,17 @@ const signupUser = async (req, res) => {
     }
 }
 
-module.exports = { signupUser, loginUser }
+// GET all users
+const getUsers = async (req, res) => {
+    const keyword = req.query.search ? {
+        $or: [
+            { name: { $regex: req.query.search, $options: "i" } },
+            { email: { $regex: req.query.search, $options: "i" }}
+        ]
+    } : {};
+
+    const users = await User.find(keyword).find({ _id: { $ne:req.user._id } });
+    return res.status(200).json(users);
+}
+
+module.exports = { signupUser, loginUser, getUsers };

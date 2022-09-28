@@ -12,6 +12,7 @@ const Signup = () => {
     const [eye, setEye] = useState(eyeHide);
     const {signup, error, isLoading} = useSignup();
 
+    
     const handleSubmit = async (e) => {
         e.preventDefault();
 
