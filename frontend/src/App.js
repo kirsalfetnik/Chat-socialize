@@ -3,7 +3,7 @@ import { useAuthContext } from './hooks/useAuthContext';
 
 // import pages 
 import Home from './pages/Home';
-import Chat from './pages/Chat';
+import ChatPage from './pages/ChatPage';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 
@@ -26,7 +26,7 @@ function App() {
             />
             <Route
             path="/chats"
-            element={<Chat />}
+            element={<ChatPage />}
             />
             <Route
             path="/login"
