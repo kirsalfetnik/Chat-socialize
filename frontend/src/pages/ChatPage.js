@@ -32,10 +32,18 @@ const ChatPage = () => {
     return (
         <div>
             <div className="chatPage">
-                <div>
+                <div className="chatInfo">
                     <div className="chatHeader">
                         <div>My chats</div>
                         <button>New Group Chat</button>
+                    </div>
+                    
+                    <div className="dropdown">
+                        <div className="searchField">
+                            <span class="material-symbols-outlined searchSymbol">search</span>
+                            <span className="searchPhrase">Search a user</span>
+                            <div className="dropdown-menu">Dropdown Content</div>
+                        </div>
                     </div>
 
                     <div className="chats">

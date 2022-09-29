@@ -6,7 +6,7 @@ const ChatDetails = ({ chat }) => {
     const { user } = useAuthContext();
 
     return (
-        <div className="chat-details">
+        <div className="chat-details" onClick={() => {}}>
             <h4>{chat.chatName}</h4>
             <p>{chat._id}</p>
         </div>
