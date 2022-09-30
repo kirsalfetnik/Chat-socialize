@@ -6,11 +6,14 @@
   --error: #e7195a;
   --blue: rgb(68, 141, 236);
   --green: rgb(76, 219, 69);
-  --fond: rgba(209, 227, 250, 0.864);
+  --fond: rgba(169, 189, 214, 0.864);
+  --darkblue: #11101d;
+  --off_white: #fbfbfb;
 }
 body {
   font-family: "Spectral";
-  background: rgba(2, 74, 146, 0.674);
+  background: var(--off_white);
+  /* background: #11101d */
   margin: 0;
 }
 header {
@@ -20,7 +23,7 @@ header .container {
   max-width: 1400px;
   max-height: 70px;
   margin: 0 auto;
-  padding: 10px 20px;
+  padding: 10px 20px 0px 20px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -30,7 +33,7 @@ header a {
   text-decoration: none;
 }
 .pages {
-  padding: 20px 10px;
+  padding: 10px 10px;
   margin: 0 10px;
 }
 
@@ -61,9 +64,17 @@ form button {
   margin-bottom: 5px;
 }
 form button.guest {
-  background: #e7195a;
+  background-image: linear-gradient(to right, #ff0084 0%, #33001b 51%, #ff0084 100%);
+  transition: 0.5s;
+  background-size: 200% auto;
+  box-shadow: 0 0 20px #eee;
   width: 100%;
   font-weight: bold;
+}
+form button.guest:hover {
+  background-position: right center;
+  color: #fff;
+  text-decoration: none;
 }
 
 div.error {
@@ -159,6 +170,7 @@ form.login {
 }
 .chatHeader button {
   background-image: linear-gradient(to right, #77A1D3 0%, #79CBCA 51%, #77A1D3 100%);
+  font-size: 1em;
   padding: 10px 25px;
   text-align: center;
   transition: 0.5s;
@@ -183,11 +195,15 @@ form.login {
 }
 .chatInfo {
   background: var(--fond);
-  padding: 20px 20px;
-  border-radius: 4px;
+  padding: 30px;
+  border-radius: 5px;
 }
 .chatHeader {
   margin-bottom: 15px;
+}
+.chatInfo .headerName {
+  font-size: 1.5em;
+  font-weight: 700;
 }
 .chatPage input {
   padding: 10px;
@@ -205,7 +221,7 @@ form.login {
   margin: 10px 0px;
   padding: 18px;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.05);
-  color: rgba(2, 74, 146, 0.674);
+  color: var(--darkblue);
 }
 .chat-details:hover {
   background-image: linear-gradient(to right, #E55D87 0%, #5FC3E4 51%, #E55D87 100%);
@@ -294,23 +310,40 @@ form.login {
   margin-right: 10px;
 }
 
-/* Dropdown search menu */
-.dropdown {
+/* sidebar */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 240px;
+  transform: translateX(-100%);
+  background: var(--darkblue);
+  padding: 20px;
+  transition: all 0.5s ease;
+}
+.sidebar.active {
+  transform: translateX(0%);
+}
+.sidebar .searchBar {
   position: relative;
 }
-.dropdown-menu {
-  position: absolute;
-  left: 0;
-  top: calc(100% + 0.25rem);
-  background-color: white;
-  padding: 10px;
-  border-radius: 4px;
-  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 10%);
-  opacity: 0;
-  transform: translateY(-10px); 
-  transition: opacity 150ms ease-in-out, transform 150ms ease-in-out;
+.sidebar .searchWord {
+  color: #fff;
+  font-size: 1.5em;
+  width: 100%;
+  align-items: center;
+  display: flex;
+  margin-bottom: 10px;
 }
-
-.dropdown-menu:active {
-  opacity: 1;
+.sidebar .menuSymbol {
+  margin-left: auto;
+}
+.sidebar .menuSymbol:hover {
+  cursor: pointer;
+}
+.sidebar .personSearchSymbol {
+  position: absolute;
+  top: 6px;
+  right: 8px;
 }

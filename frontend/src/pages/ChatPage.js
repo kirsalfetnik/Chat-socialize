@@ -5,10 +5,16 @@ import { useAuthContext } from "../hooks/useAuthContext";
 // components
 import ChatDetails from '../components/ChatDetails';
 import ChatWindow from '../components/ChatWindow';
+import Sidebar from '../components/Sidebar';
 
 const ChatPage = () => {
     const {chats, dispatch} = useChatContext();
     const {user} = useAuthContext();
+
+    const handleSearchClick = () => {
+        const sidebar = document.querySelector(".sidebar");
+        sidebar.classList.toggle("active");
+    }
 
     useEffect(() => {
         const fetchChats = async () => {
@@ -31,19 +37,18 @@ const ChatPage = () => {
 
     return (
         <div>
+            {user && 
             <div className="chatPage">
+                <Sidebar />
                 <div className="chatInfo">
                     <div className="chatHeader">
-                        <div>My chats</div>
+                        <div className="headerName">My chats</div>
                         <button>New Group Chat</button>
                     </div>
                     
-                    <div className="dropdown">
-                        <div className="searchField">
-                            <span class="material-symbols-outlined searchSymbol">search</span>
-                            <span className="searchPhrase">Search a user</span>
-                            <div className="dropdown-menu">Dropdown Content</div>
-                        </div>
+                    <div className="searchField" onClick={handleSearchClick}>
+                        <span className="material-symbols-outlined searchSymbol">search</span>
+                        <span className="searchPhrase">Search a user</span>
                     </div>
 
                     <div className="chats">
@@ -56,6 +61,7 @@ const ChatPage = () => {
                 </div>
                 <ChatWindow />
             </div>
+            }
         </div>
     )
 }
