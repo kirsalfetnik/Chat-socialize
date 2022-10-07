@@ -13,7 +13,7 @@ const Navbar = () => {
     return (
         <header>
             <div className="container">
-                <Link to="/">
+                <Link to="/chats">
                     <h1>Chat & Socialize</h1>
                 </Link>
                 <nav>
