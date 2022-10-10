@@ -35,6 +35,16 @@ const ChatPage = () => {
         }
     }, [dispatch, user]);
 
+    const openModal = () => {
+        const modal = document.querySelector(".modal-container");
+        modal.classList.toggle("active");
+    }
+
+    const closeModal = () => {
+        const modal = document.querySelector(".modal-container");
+        modal.classList.toggle("active");
+    }
+
     return (
         <div>
             {user && 
@@ -43,7 +53,19 @@ const ChatPage = () => {
                 <div className="chatInfo">
                     <div className="chatHeader">
                         <div className="headerName">My chats</div>
-                        <button>New Group Chat</button>
+
+                        <button id="openModal" onClick={openModal}>New Group Chat</button>
+                        
+                        <div className="modal-container" id="modal-container">
+                            <div className="modalHeader">
+                                <div>Create group chat</div>
+                                <span className="material-symbols-outlined sendSymbol" id="closeModal" onClick={closeModal}>close</span>
+                            </div>
+                            <input placeholder="Chat Name"></input>
+                            <input placeholder="Add Users"></input>
+                            <button className="createChatButton">Create Chat</button>
+                        </div>
+
                     </div>
                     
                     <div className="searchField" onClick={handleSearchClick}>
