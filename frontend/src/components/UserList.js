@@ -7,9 +7,6 @@ const UserList = ({ person }) => {
     
     const accessChat = async (userId) => {
 
-        console.log(userId);
-        console.log("Hello")
-
         const response = await fetch('/api/chat', {
             method: 'POST',
             body: JSON.stringify({ userId }),
