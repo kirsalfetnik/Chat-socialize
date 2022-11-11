@@ -1,12 +1,15 @@
-import { useAuthContext } from "../hooks/useAuthContext";
 import { useChatContext } from "../hooks/useChatContext";
 
 const ChatDetails = ({ chat }) => {
-    const { dispatch } = useChatContext();
-    const { user } = useAuthContext();
+    const { setSelectedChat } = useChatContext();
+
+    const selectChat = (chat) => {
+        setSelectedChat(chat);
+        console.log(chat);
+    }
 
     return (
-        <div className="chat-details" onClick={() => {}}>
+        <div className="chat-details" onClick={() => {selectChat(chat)}}>
             <h4>{chat.chatName}</h4>
             <p>{chat._id}</p>
         </div>

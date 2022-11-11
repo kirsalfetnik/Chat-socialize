@@ -1,4 +1,4 @@
-import { createContext, useReducer } from 'react';
+import { createContext, useReducer, useState } from 'react';
 
 export const ChatContext = createContext();
 
@@ -22,12 +22,15 @@ export const chatReducer = (state, action) => {
 }
 
 export const ChatContextProvider = ({ children }) => {
+    
     const [state, dispatch] = useReducer(chatReducer, {
         chats: null
     });
 
+    const [selectedChat, setSelectedChat] = useState();
+
     return (
-        <ChatContext.Provider value={{...state, dispatch}}>
+        <ChatContext.Provider value={{...state, dispatch, selectedChat, setSelectedChat}}>
             { children }
         </ChatContext.Provider>
     )

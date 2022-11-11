@@ -25,7 +25,7 @@ const accessChat = async (req, res) => {
         res.status(200).json(isChat[0]);
     } else {
         var chatData = {
-            chatName: "sender",
+            chatName: "Sender",
             isGroupChat: false,
             users: [req.user._id, userId]
         }

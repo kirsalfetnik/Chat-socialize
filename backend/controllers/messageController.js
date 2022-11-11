@@ -30,7 +30,7 @@ const sendMessage = async (req, res) => {
         });
 
         res.json(message);
-    } catch(error) {
+    } catch (error) {
         res.status(400).json({error: error.message});
     }
 }
