@@ -6,7 +6,7 @@ const sendMessage = async (req, res) => {
     const { content, chatId } = req.body;
 
     if (!content || !chatId) {
-        return res.status(400).json({error: error.message});
+        return res.status(400).json({error: "Error occured"});
     }
 
     var newMessage = {
@@ -31,7 +31,7 @@ const sendMessage = async (req, res) => {
 
         res.json(message);
     } catch (error) {
-        res.status(400).json({error: error.message});
+        res.status(400).json({error: "Error occured"});
     }
 }
 
@@ -43,7 +43,7 @@ const allMessages = async (req, res) => {
 
         res.json(messages);
     } catch (error) {
-        res.status(400).json({error: error.message});
+        res.status(400).json({error: "Error occured"});
     }
 }
 

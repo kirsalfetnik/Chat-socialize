@@ -199,7 +199,18 @@ form.login {
   background: var(--fond);
   padding: 30px;
   border-radius: 5px;
+
+  overflow-y: scroll;
+  -ms-overflow-style: none;
+  /* for Internet Explorer, Edge */
+  scrollbar-width: none;
+  /* for Firefox */
 }
+.chatInfo::-webkit-scrollbar {
+  display: none;
+  /* for Chrome, Safari, and Opera */
+}
+
 .chatHeader {
   margin-bottom: 15px;
 }
@@ -229,7 +240,11 @@ form.login {
   background-image: linear-gradient(to right, #E55D87 0%, #5FC3E4 51%, #E55D87 100%);
   background-size: 200% auto;
   color: white;
-
+}
+.chat-details.active {
+  background-image: linear-gradient(to right, #E55D87 0%, #5FC3E4 51%, #E55D87 100%);
+  background-size: 200% auto;
+  color: white;
 }
 .chat-details h4 {
   margin: 0 0 10px 0;
@@ -270,6 +285,8 @@ form.login {
   background: #fff;
   flex-grow: 1;
   padding: 10px;
+  overflow-y: scroll;
+  overflow-x: hidden;
 }
 .chatWindow input {
   margin: 6px 0px 0px 0px;
@@ -412,4 +429,30 @@ form.login {
 }
 .modal-container .createChatButton {
   margin-top: 12px;
+}
+
+/* Messages */
+.messages {
+  display: flex;
+  flex-direction: column;
+}
+
+/*
+::-webkit-scrollbar {
+  width: 0px;
+  background: transparent;
+}
+*/
+
+/*
+.scrollableField {
+  overflow-x: hidden;
+  overflow-y: hidden;
+}
+*/
+
+.scrollableField img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
 }

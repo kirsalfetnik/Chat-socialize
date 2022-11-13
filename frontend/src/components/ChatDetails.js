@@ -1,11 +1,14 @@
 import { useChatContext } from "../hooks/useChatContext";
 
 const ChatDetails = ({ chat }) => {
+    
     const { setSelectedChat } = useChatContext();
 
     const selectChat = (chat) => {
         setSelectedChat(chat);
-        console.log(chat);
+        console.log(chat._id);
+        var theSelectedChat = document.querySelector(".chat-details");
+        theSelectedChat.classList.toggle("active");
     }
 
     return (
