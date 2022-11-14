@@ -1,6 +1,8 @@
 const Chat = require('../models/chatModel');
 const User = require('../models/userModel');
+const mongoose = require('mongoose');
 
+// ACCESS/CREATE a chat
 const accessChat = async (req, res) => {
     const { userId } = req.body;
 
@@ -41,6 +43,7 @@ const accessChat = async (req, res) => {
     }
 }
 
+// GET all chats
 const getChats = async (req, res) => {
     try {
         Chat.find({ users: { $elemMatch: {$eq: req.user._id} } })
@@ -61,6 +64,24 @@ const getChats = async (req, res) => {
     }
 }
 
+// DELETE a chat
+const deleteChat = async (req, res) => {
+    const { id } = req.params;
+
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(400).json({error: "No such chat"});
+    }
+
+    const chat = await Chat.findOneAndDelete({_id: id});
+
+    if (!chat) {
+        return res.status(400).json({error: "No such chat"});
+    }
+
+    res.status(200).json(chat);
+}
+
+// POST a new group chat
 const createGroupChat = async (req, res) => {
     if (!req.body.users || !req.body.name) {
         return res.status(400).json({ error: "Fill in all the fields" });
@@ -155,4 +176,4 @@ const removeFromGroup = async (req, res) => {
     }
 }
 
-module.exports = { accessChat, getChats, createGroupChat, renameGroup, addToGroup, removeFromGroup };
+module.exports = { accessChat, getChats, deleteChat, createGroupChat, renameGroup, addToGroup, removeFromGroup };

@@ -3,6 +3,7 @@ const express = require('express');
 const { 
     accessChat,
     getChats,
+    deleteChat,
     createGroupChat,
     renameGroup,
     addToGroup,
@@ -17,6 +18,9 @@ router.post('/', requireAuth, accessChat);
 
 // GET all the chats
 router.get('/', requireAuth, getChats);
+
+// DELETE a chat
+router.delete('/:id', requireAuth, deleteChat);
 
 // CREATE a new group
 router.post('/group', requireAuth, createGroupChat);

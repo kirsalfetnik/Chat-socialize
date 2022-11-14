@@ -172,6 +172,7 @@ form.login {
 }
 .chatHeader button {
   background-image: linear-gradient(to right, #77A1D3 0%, #79CBCA 51%, #77A1D3 100%);
+  font-family: "Spectral";
   font-size: 1em;
   padding: 10px 25px;
   text-align: center;

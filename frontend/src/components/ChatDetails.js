@@ -1,11 +1,14 @@
+import { useAuthContext } from "../hooks/useAuthContext";
 import { useChatContext } from "../hooks/useChatContext";
 
 const ChatDetails = ({ chat }) => {
+    const { dispatch } = useChatContext();
     const { setSelectedChat } = useChatContext();
-    const user = JSON.parse(localStorage.getItem('user'));
+    const { user } = useAuthContext();
+    const userInfo = JSON.parse(localStorage.getItem('user'));
 
     const chatName = () => {
-        if (chat.users[0].name !== user.userName) { 
+        if (chat.users[0].name !== userInfo.userName) { 
             return chat.users[0].name
         }
         else return chat.users[1].name;
@@ -21,8 +24,21 @@ const ChatDetails = ({ chat }) => {
         theSelectedChat.classList.toggle("active");
     }
 
-    const handleDelete = () => {
+    const handleDelete = async () => {
+        if (!user) {
+            return
+        }
+        const response = await fetch('/api/chat/' + chat._id, {
+            method: 'DELETE',
+            headers: {
+                'Authorization': `Bearer ${user.token}`
+            }
+        });
+        const json = await response.json();
 
+        if (response.ok) {
+            dispatch({type: 'DELETE_CHAT', payload: json});
+        }
     }
 
     return (
