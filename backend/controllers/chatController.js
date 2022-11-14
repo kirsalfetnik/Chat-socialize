@@ -21,10 +21,12 @@ const accessChat = async (req, res) => {
 
     isChat = await User.populate(isChat, {
         path: 'latestMessage.sender',
-        select: 'name, picture, email'
+        select: 'name picture email'
     });
+
     if (isChat.length > 0) {
         res.status(200).json(isChat[0]);
+        //res.send(isChat[0]);
     } else {
         var chatData = {
             chatName: req.body.name,
@@ -34,6 +36,7 @@ const accessChat = async (req, res) => {
     }
 
     try {
+        if (isChat.length > 0) {return}
         const createdChat = await Chat.create(chatData);
         const fullChat = await Chat.findOne({_id: createdChat._id}).populate("users", "-password");
 

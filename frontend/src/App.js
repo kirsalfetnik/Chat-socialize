@@ -2,7 +2,6 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { useAuthContext } from './hooks/useAuthContext';
 
 // import pages 
-import Home from './pages/Home';
 import ChatPage from './pages/ChatPage';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
@@ -22,11 +21,7 @@ function App() {
             
             <Route
             path="/"
-            element={<Home />}
-            />
-            <Route
-            path="/chats"
-            element={<ChatPage />}
+            element={!user ? <Login /> : <ChatPage />}
             />
             <Route
             path="/login"
