@@ -8,6 +8,7 @@ const ChatWindow = () => {
     const { selectedChat } = useChatContext();
     const [messages, setMessages] = useState([]);
     const [newMessage, setNewMessage] = useState("");
+    const [loading, setLoading] = useState(false);
 
     const fetchMessages = async () => {
         if(!selectedChat) return;
@@ -19,9 +20,12 @@ const ChatWindow = () => {
                     'Authorization': `Bearer ${user.token}`
                 }
             });
+
+            setLoading(true);
             const data = await response.json();
             setMessages(data);
-            console.log(data);
+            setLoading(false);
+            // console.log(data);
         } catch (error) {
             console.log('Error occured while fetching chats', error);
         }
@@ -64,14 +68,16 @@ const ChatWindow = () => {
     
     return (
         <div className="chatWindow">
-            <div className="chatWindowHeader">
-                <div>Hello</div>
-            </div>
+            <div className="chatWindowHeader"></div>
 
             <div className="chatWindowBody">
+                {loading ? (
+                    <span className="loader"></span>
+                ) : (
                 <div className="messages">
-                    <ScrollableChat messages={messages}></ScrollableChat>
+                    <ScrollableChat messages={messages} />
                 </div>
+                )}
             </div>
 
             <form className="writeMessage" onKeyDown={sendMessage} required>
