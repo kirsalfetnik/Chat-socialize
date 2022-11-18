@@ -13,6 +13,7 @@ const ChatWindow = () => {
     const [messages, setMessages] = useState([]);
     const [newMessage, setNewMessage] = useState("");
     const [loading, setLoading] = useState(false);
+    const [socketConnected, setSocketConnected] = useState(false);
 
     const fetchMessages = async () => {
         if(!selectedChat) return;
@@ -29,6 +30,7 @@ const ChatWindow = () => {
             const data = await response.json();
             setMessages(data);
             setLoading(false);
+            socket.emit('join chat', selectedChat._id)
             // console.log(data);
         } catch (error) {
             console.log('Error occured while fetching chats', error);
@@ -36,8 +38,26 @@ const ChatWindow = () => {
     }
 
     useEffect(() => {
+        socket = io(ENDPOINT);
+        socket.emit('setup', user);
+        socket.on('connection', () => setSocketConnected(true));
+    }, []);
+    
+    useEffect(() => {
         fetchMessages();
+
+        selectedChatCompare = selectedChat;
     }, [selectedChat]);
+
+    useEffect(() => {
+        socket.on('message recieved', (newMessageReceived) => {
+            if(!selectedChatCompare || selectedChatCompare._id !== newMessageReceived.chat._id) {
+                // give a notification
+            } else {
+                setMessages([...messages, newMessageReceived]);
+            }
+        })
+    });
 
     const sendMessage = async (event) => {
         if(event.key==="Enter" && newMessage) {
@@ -56,6 +76,8 @@ const ChatWindow = () => {
                 });
                 
                 const data = await response.json();
+                
+                socket.emit('new message', data);
                 setMessages([...messages, data]);
 
             } catch(error) {
@@ -63,10 +85,6 @@ const ChatWindow = () => {
             }
         }
     }
-
-    useEffect(() => {
-        socket = io(ENDPOINT);
-    }, []);
 
     const typingHandler = (e) => {
         setNewMessage(e.target.value);
