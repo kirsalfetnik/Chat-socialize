@@ -2,6 +2,10 @@ import { useEffect, useState } from 'react';
 import { useAuthContext } from "../hooks/useAuthContext";
 import { useChatContext } from '../hooks/useChatContext';
 import ScrollableChat from './ScrollableChat';
+import io from 'socket.io-client';
+
+const ENDPOINT = "http://localhost:4000";
+var socket, selectedChatCompare;
 
 const ChatWindow = () => {
     const { user } = useAuthContext();
@@ -60,6 +64,10 @@ const ChatWindow = () => {
         }
     }
 
+    useEffect(() => {
+        socket = io(ENDPOINT);
+    }, []);
+
     const typingHandler = (e) => {
         setNewMessage(e.target.value);
 
@@ -89,7 +97,8 @@ const ChatWindow = () => {
                 </input>
 
                 <span 
-                className="material-symbols-outlined sendSymbol">send</span>
+                className="material-symbols-outlined sendSymbol" onClick={sendMessage} value={newMessage}>send
+                </span>
             </form>
 
         </div>

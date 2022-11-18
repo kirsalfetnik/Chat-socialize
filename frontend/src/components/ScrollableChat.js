@@ -1,4 +1,6 @@
 const isSameSenderMargin = (messages, m, i, userId) => {
+
+    
     if (
         i < (messages.length - 1) &&
         messages[i + 1].sender._id === m.sender._id &&
@@ -45,6 +47,7 @@ const ScrollableChat = ({ messages }) => {
         <div className="scrollableField">
             
             {messages && messages.map((mes, index) => {
+
                 return (
                 <div style={{ display: "flex", alignItems: "center" }} >
                     

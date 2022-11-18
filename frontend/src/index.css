@@ -54,7 +54,10 @@ form input {
 form button {
   display: block;
   width: 100%;
-  background: var(--blue);
+  background-image: linear-gradient(to right, #56CCF2 0%, #2F80ED 51%, #56CCF2 100%);
+  transition: 0.5s;
+  background-size: 200% auto;
+  box-shadow: 0 0 20px #eee;
   font-weight: bold;
   border: 0;
   color: #fff;
@@ -65,12 +68,18 @@ form button {
   margin-bottom: 5px;
 }
 form button.guest {
+  display: block;
+  width: 100%;
   background-image: linear-gradient(to right, #ff0084 0%, #33001b 51%, #ff0084 100%);
   transition: 0.5s;
   background-size: 200% auto;
   box-shadow: 0 0 20px #eee;
-  width: 100%;
   font-weight: bold;
+}
+form button:hover {
+  background-position: right center;
+  color: #fff;
+  text-decoration: none;
 }
 form button.guest:hover {
   background-position: right center;
@@ -193,7 +202,7 @@ form.login {
 
 .chatPage {
   display: grid;
-  grid-template-columns: 3fr 7fr;
+  grid-template-columns: 3fr 8fr;
   gap: 20px;  
 }
 .chatInfo {
@@ -235,7 +244,7 @@ form.login {
   background: #fff;
   border-radius: 4px;
   margin: 10px 0px;
-  padding: 18px;
+  padding: 16px 16px 0px 16px;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.05);
   color: var(--darkblue);
 }
@@ -263,7 +272,7 @@ form.login {
 }
 .chat-details .deleteSymbol {
   position: relative;
-  left: 332px;  
+  left: 296px;  
   top: -70px;
 }
 .chat-details .deleteSymbol:hover {

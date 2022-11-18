@@ -44,7 +44,7 @@ const ChatDetails = ({ chat }) => {
     return (
             <div className="chat-details" id={chat._id} onClick={() => {selectChat(chat)}}>
                 <h4>{chatName()}</h4>
-                <p>{chat._id}</p>
+                <p>Chat ID: {chat._id}</p>
                 <span className="material-symbols-outlined deleteSymbol" onClick={handleDelete}>delete</span>
             </div>
     )
