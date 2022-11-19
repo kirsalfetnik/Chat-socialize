@@ -5,7 +5,7 @@ import ScrollableChat from './ScrollableChat';
 import io from 'socket.io-client';
 import $ from 'jquery';
 
-const ENDPOINT = "https://chat-socialize.herokuapp.com/";
+const ENDPOINT = "https://localhost:4000";
 var socket, selectedChatCompare;
 
 const ChatWindow = () => {
