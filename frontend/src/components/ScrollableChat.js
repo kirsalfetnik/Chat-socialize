@@ -71,11 +71,6 @@ const ScrollableChat = ({ messages, isTyping }) => {
                         maxWidth: "75%"
                     }}>
                         {mes.content}
-                        <div className="typingIndicator">
-                            {isTyping ? 
-                            <div>A message is being written...</div>
-                        : <></>}
-                        </div>
                     </span>
 
                 </div>

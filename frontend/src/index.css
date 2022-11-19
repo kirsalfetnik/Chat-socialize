@@ -309,6 +309,7 @@ form.login {
 }
 
 .chatWindowBody {
+  position: relative;
   background: #fff;
   flex-grow: 1;
   padding: 10px;
@@ -512,6 +513,9 @@ form.login {
 
 /* Typing indicator */
 .typingIndicator {
+  position: absolute; 
+  bottom: 0;
+  left: 0;
   background: #fff;
   left: 12px;
   position: absolute;

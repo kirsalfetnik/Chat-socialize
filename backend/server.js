@@ -15,7 +15,7 @@ const server = require('http').createServer(app);
 app.use(express.json());
 
 app.use((req, res, next) => {
-    console.log(req.path, req.method);
+    // console.log(req.path, req.method);
     next();
 })
 
@@ -37,20 +37,9 @@ mongoose.connect(process.env.MONGO_URI)
         console.log(err);
     });
 
-/*
-const io = require('socket.io')(app.listen(server, {
-    pingTimeout: 60000,
-    cors: {
-        origin: `http://localhost:${process.env.PORT}`
-    }
-}));
 
-io.on("Connection", (socket) => {
-    console.log("Connected to socket.io");
-})
-*/
-
-app.use(cors()); // Use this after the variable declaration
+// Socket.io
+app.use(cors());
 
 const io = require('socket.io')(server, {
     pingTimeout: 60000,
@@ -61,11 +50,9 @@ const io = require('socket.io')(server, {
 });
 
 io.on("connection", (socket) => {
-  console.log("Connected to socket.io");
 
   socket.on('setup', (userData) => {
     socket.join(userData.user_Id);
-    console.log(userData.user_Id);
     socket.emit('connected');
   });
 
@@ -87,5 +74,11 @@ io.on("connection", (socket) => {
 
         socket.in(user._id).emit('message received', newMessageReceived);
     });
+  });
+
+  socket.off('setup', () => {
+    console.log("USER DISCONNECTED");
+    socket.leave(userData.user_Id);
   })
+
 });

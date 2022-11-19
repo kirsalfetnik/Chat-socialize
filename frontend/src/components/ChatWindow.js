@@ -3,10 +3,10 @@ import { useAuthContext } from "../hooks/useAuthContext";
 import { useChatContext } from '../hooks/useChatContext';
 import ScrollableChat from './ScrollableChat';
 import io from 'socket.io-client';
+import $ from 'jquery';
 
 const ENDPOINT = "http://localhost:4000";
 var socket, selectedChatCompare;
-const objectSelector = document.getElementById('chatWindowBody');
 
 const ChatWindow = () => {
     const { user } = useAuthContext();
@@ -18,6 +18,13 @@ const ChatWindow = () => {
     const [typing, setTyping] = useState(false);
     const [isTyping, setIsTyping] = useState(false);
 
+    /*
+    const updateScroll = () => {
+        var objectSelector = document.getElementById('chatWindowBody');
+        objectSelector.scrollTop = objectSelector.scrollHeight;
+    }
+    */
+    
     const fetchMessages = async () => {
         if(!selectedChat) return;
 
@@ -49,14 +56,27 @@ const ChatWindow = () => {
     
     useEffect(() => {
         fetchMessages();
-
         selectedChatCompare = selectedChat;
     }, [selectedChat]);
 
     useEffect(() => {
+        $('#chatWindowBody').animate({
+        scrollTop: $('#chatWindowBody').get(0).scrollHeight
+        }, 200);
+    }, [newMessage]);
+
+    useEffect(() => {
         socket.on('message received', (newMessageReceived) => {
             if(!selectedChatCompare || selectedChatCompare._id !== newMessageReceived.chat._id) {
-                // give a notification
+                
+                // Notifications
+                
+                /*
+                if(!notification.includes(newMessageReceived)) {
+                    setNotification([newMessageReceived, ...notification]);
+                }
+                */
+
             } else {
                 setMessages([...messages, newMessageReceived]);
             }
@@ -88,7 +108,10 @@ const ChatWindow = () => {
                 console.log('Error occured while sending the message', error);
             }
             
-            objectSelector.scrollTop = objectSelector.scrollHeight;
+            $('#chatWindowBody').animate({
+            scrollTop: $('#chatWindowBody').get(0).scrollHeight
+            }, 200);
+            
         }
     }
 
@@ -130,6 +153,11 @@ const ChatWindow = () => {
                 )}
             </div>
 
+            <div className="typingIndicator">
+            {isTyping ? 
+            <div>A message is being written...</div>
+            : <></>}
+            </div>
 
             <form className="writeMessage" onKeyDown={sendMessage} required>
                 

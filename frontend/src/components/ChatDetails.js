@@ -16,7 +16,6 @@ const ChatDetails = ({ chat }) => {
 
     const selectChat = (chat) => {
         setSelectedChat(chat);
-        console.log(chat._id);
 
         var elems = document.querySelectorAll(".active");
         [].forEach.call(elems, function(el) {el.classList.remove("active")});
