@@ -14,6 +14,8 @@ const ChatWindow = () => {
     const [newMessage, setNewMessage] = useState("");
     const [loading, setLoading] = useState(false);
     const [socketConnected, setSocketConnected] = useState(false);
+    const [typing, setTyping] = useState(false);
+    const [isTyping, setIsTyping] = useState(false);
 
     const fetchMessages = async () => {
         if(!selectedChat) return;
@@ -31,7 +33,6 @@ const ChatWindow = () => {
             setMessages(data);
             setLoading(false);
             socket.emit('join chat', selectedChat._id);
-            // console.log(data);
         } catch (error) {
             console.log('Error occured while fetching chats', error);
         }
@@ -41,6 +42,8 @@ const ChatWindow = () => {
         socket = io(ENDPOINT);
         socket.emit('setup', user);
         socket.on('connected', () => setSocketConnected(true));
+        socket.on('typing', () => setIsTyping(true));
+        socket.on('stop typing', () => setIsTyping(false));
     }, []);
     
     useEffect(() => {
@@ -62,6 +65,7 @@ const ChatWindow = () => {
     const sendMessage = async (event) => {
         if(event.key==="Enter" && newMessage) {
             event.preventDefault();
+            socket.emit('stop typing', selectedChat._id);
             
             try {
                 if(!selectedChat) return;
@@ -79,6 +83,7 @@ const ChatWindow = () => {
                 
                 socket.emit('new message', data);
                 setMessages([...messages, data]);
+                window.scrollTo(0,document.querySelector(".chatWindowBody").scrollHeight);
 
             } catch(error) {
                 console.log('Error occured while sending the message', error);
@@ -90,6 +95,23 @@ const ChatWindow = () => {
         setNewMessage(e.target.value);
 
         // Typing indicator logic
+        if(!socketConnected) return;
+        
+        if(!typing) {
+            setTyping(true);
+            socket.emit('typing', selectedChat._id);
+        }
+        let lastTypingTime = new Date().getTime();
+        var timerLength = 3000;
+        setTimeout(() => {
+            var timeNow = new Date().getTime();
+            var timeDiff = timeNow - lastTypingTime;
+
+            if(timeDiff >= timerLength && typing) {
+                socket.emit('stop typing', selectedChat._id);
+                setTyping(false);
+            }
+        }, timerLength);
     }
     
     return (
@@ -104,6 +126,12 @@ const ChatWindow = () => {
                     <ScrollableChat messages={messages} />
                 </div>
                 )}
+            </div>
+
+            <div className="typingIndicator">
+                    {isTyping ? 
+                    <div>A message is being written</div>
+                    : <></>}
             </div>
 
             <form className="writeMessage" onKeyDown={sendMessage} required>
