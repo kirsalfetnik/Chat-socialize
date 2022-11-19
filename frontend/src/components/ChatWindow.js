@@ -30,7 +30,7 @@ const ChatWindow = () => {
             const data = await response.json();
             setMessages(data);
             setLoading(false);
-            socket.emit('join chat', selectedChat._id)
+            socket.emit('join chat', selectedChat._id);
             // console.log(data);
         } catch (error) {
             console.log('Error occured while fetching chats', error);
@@ -40,7 +40,7 @@ const ChatWindow = () => {
     useEffect(() => {
         socket = io(ENDPOINT);
         socket.emit('setup', user);
-        socket.on('connection', () => setSocketConnected(true));
+        socket.on('connected', () => setSocketConnected(true));
     }, []);
     
     useEffect(() => {
@@ -50,7 +50,7 @@ const ChatWindow = () => {
     }, [selectedChat]);
 
     useEffect(() => {
-        socket.on('message recieved', (newMessageReceived) => {
+        socket.on('message received', (newMessageReceived) => {
             if(!selectedChatCompare || selectedChatCompare._id !== newMessageReceived.chat._id) {
                 // give a notification
             } else {

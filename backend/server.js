@@ -64,7 +64,8 @@ io.on("connection", (socket) => {
   console.log("Connected to socket.io");
 
   socket.on('setup', (userData) => {
-    socket.join(userData._id);
+    socket.join(userData.user_Id);
+    console.log(userData.user_Id);
     socket.emit('connected');
   });
 
@@ -78,7 +79,7 @@ io.on("connection", (socket) => {
 
     if (!chat.users) return console.log('chat.users not defined');
 
-    chat.users.forEach(user => {
+    chat.users.forEach((user) => {
         if(user._id == newMessageReceived.sender._id) return;
 
         socket.in(user._id).emit('message received', newMessageReceived);
