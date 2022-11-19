@@ -6,7 +6,7 @@ const isSameSenderMargin = (messages, m, i, userId) => {
         messages[i + 1].sender._id === m.sender._id &&
         messages[i].sender._id !== userId
     )
-    return 35;
+    return 46;
     
     else if (
         (i < (messages.length - 1) &&
@@ -49,13 +49,13 @@ const ScrollableChat = ({ messages }) => {
             {messages && messages.map((mes, index) => {
 
                 return (
-                <div style={{ display: "flex", alignItems: "center" }} >
+                <div className="fullMessage">
                     
                     <div key={mes._id}>
                         {(isSameSender(messages, mes, index, user.user_Id)
                         || isLastMessage(messages, index, user.user_Id)
                         ) && (
-                        <div label={mes.sender.name} placement="bottom-start">
+                        <div label={mes.sender.name} placement="bottom-start" className="profilePicture">
                             <img src={mes.sender.picture} alt="Avatar" className="avatar" />
                         </div>
                         )}

@@ -244,9 +244,11 @@ form.login {
   background: #fff;
   border-radius: 4px;
   margin: 10px 0px;
-  padding: 16px 16px 0px 16px;
+  padding: 16px 16px 16px 16px;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.05);
   color: var(--darkblue);
+  overflow-x: hidden;
+  position: relative;
 }
 .chat-details:hover {
   background-image: linear-gradient(to right, #8b2c4a 0%, #5cc4e7 51%, #f26a95 100%);
@@ -271,9 +273,9 @@ form.login {
   position: absolute;
 }
 .chat-details .deleteSymbol {
-  position: relative;
-  left: 296px;  
-  top: -70px;
+  position: absolute;
+  right: 6px;  
+  top: 6px;
 }
 .chat-details .deleteSymbol:hover {
   cursor: pointer;
@@ -312,6 +314,7 @@ form.login {
   padding: 10px;
   overflow-y: scroll;
   overflow-x: hidden;
+  position: relative;
 }
 .chatWindow input {
   margin: 6px 0px 0px 0px;
@@ -462,10 +465,17 @@ form.login {
   flex-direction: column;
 }
 
+.fullMessage {
+  display: flex;
+  align-items: center;
+}
+
 .scrollableField img {
-  width: 34px;
-  height: 34px;
+  width: 42px;
+  height: 42px;
   border-radius: 50%;
+  margin-right: 5px;
+  vertical-align: middle;
 }
 
 /* Loading animation */
@@ -491,3 +501,9 @@ form.login {
 }
 
 /* Typing indicator */
+.typingIndicator {
+  background: #fff;
+  left: 12px;
+  position: absolute;
+  bottom: 4px;
+}

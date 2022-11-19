@@ -124,15 +124,16 @@ const ChatWindow = () => {
                 ) : (
                 <div className="messages">
                     <ScrollableChat messages={messages} />
+                <div className="typingIndicator">
+                    {isTyping ? 
+                    <div>A message is being written...</div>
+                    : <></>}
                 </div>
+            </div>
+                
                 )}
             </div>
 
-            <div className="typingIndicator">
-                    {isTyping ? 
-                    <div>A message is being written</div>
-                    : <></>}
-            </div>
 
             <form className="writeMessage" onKeyDown={sendMessage} required>
                 
