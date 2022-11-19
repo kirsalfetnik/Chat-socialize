@@ -3,7 +3,7 @@
     "socket.io": "^4.5.3"
   },
   "scripts": {
-    "start": "nodemon backend/server.js",
+    "start": "node backend/server.js",
     "render-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build -- prefix client"
   }
 }
