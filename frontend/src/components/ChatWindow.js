@@ -6,6 +6,7 @@ import io from 'socket.io-client';
 
 const ENDPOINT = "http://localhost:4000";
 var socket, selectedChatCompare;
+const objectSelector = document.getElementById('chatWindowBody');
 
 const ChatWindow = () => {
     const { user } = useAuthContext();
@@ -83,11 +84,11 @@ const ChatWindow = () => {
                 
                 socket.emit('new message', data);
                 setMessages([...messages, data]);
-                window.scrollTo(0,document.querySelector(".chatWindowBody").scrollHeight);
-
             } catch(error) {
                 console.log('Error occured while sending the message', error);
             }
+            
+            objectSelector.scrollTop = objectSelector.scrollHeight;
         }
     }
 
@@ -118,17 +119,12 @@ const ChatWindow = () => {
         <div className="chatWindow">
             <div className="chatWindowHeader"></div>
 
-            <div className="chatWindowBody">
+            <div className="chatWindowBody" id="chatWindowBody">
                 {loading ? (
                     <span className="loader"></span>
                 ) : (
                 <div className="messages">
-                    <ScrollableChat messages={messages} />
-                <div className="typingIndicator">
-                    {isTyping ? 
-                    <div>A message is being written...</div>
-                    : <></>}
-                </div>
+                    <ScrollableChat messages={messages} isTyping={isTyping}/>
             </div>
                 
                 )}

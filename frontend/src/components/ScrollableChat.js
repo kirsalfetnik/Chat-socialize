@@ -40,7 +40,7 @@ const isLastMessage = (allMessages, index, userId) => {
     )
 }
 
-const ScrollableChat = ({ messages }) => {
+const ScrollableChat = ({ messages, isTyping }) => {
     const user = JSON.parse(localStorage.getItem('user'));
     
     return (
@@ -71,6 +71,11 @@ const ScrollableChat = ({ messages }) => {
                         maxWidth: "75%"
                     }}>
                         {mes.content}
+                        <div className="typingIndicator">
+                            {isTyping ? 
+                            <div>A message is being written...</div>
+                        : <></>}
+                        </div>
                     </span>
 
                 </div>

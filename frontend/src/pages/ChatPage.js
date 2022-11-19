@@ -58,7 +58,7 @@ const ChatPage = () => {
                         
                         <div className="modal-container" id="modal-container">
                             <div className="modalHeader">
-                                <div>Create group chat</div>
+                                <div style={{color: "#fff"}}>Create a group chat</div>
                                 <span className="material-symbols-outlined sendSymbol" id="closeModal" onClick={closeModal}>close</span>
                             </div>
                             <input placeholder="Chat Name"></input>

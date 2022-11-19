@@ -360,6 +360,7 @@ form.login {
 /* sidebar */
 .sidebar {
   position: fixed;
+  z-index: 100;
   top: 0;
   left: 0;
   height: 100%;
@@ -426,12 +427,13 @@ form.login {
 .modal-container {
   opacity: 0;
   position: absolute;
+  z-index: 99;
   pointer-events: none;
   width: 400px;
   top: 50%;
   left: 50%;
   padding: 20px 20px 15px 20px;
-  background: rgb(121, 175, 250);
+  background-image: linear-gradient(to right, #24C6DC 0%, #7a7ced 51%, #39d2e6 100%);
   border-radius: 4px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   text-align: center;
@@ -448,6 +450,7 @@ form.login {
   font-size: 20px;
   font-weight: bold;
   padding: 8px;
+  text-transform: uppercase;
 }
 .modalHeader #closeModal {
   margin-left: auto;
@@ -456,7 +459,14 @@ form.login {
   cursor: pointer;
 }
 .modal-container .createChatButton {
+  background-image: linear-gradient(to right, #F7971E 0%, #FFD200 51%, #F7971E 100%);
   margin-top: 12px;
+  padding: 10px 15px 10px 15px;
+  transition: 0.5s;
+  background-size: 200% auto;
+  color: white;
+  box-shadow: 0 0 20px #eee;
+  border-radius: 10px;
 }
 
 /* Messages */

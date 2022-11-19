@@ -46,6 +46,7 @@ const Sidebar = () => {
                     placeholder="Search by name or email"
                     onChange={(e) => setQuery(e.target.value)}
                     value={query}
+                    onKeyDown={handleSearch}
                 />
                 <span className="material-symbols-outlined personSearchSymbol" onClick={handleSearch}>person_search</span>
             </div>
