@@ -5,7 +5,8 @@ import ScrollableChat from './ScrollableChat';
 import io from 'socket.io-client';
 import $ from 'jquery';
 
-const ENDPOINT = "https://chat-socialize.onrender.com/";
+// const ENDPOINT = "https://chat-socialize.onrender.com/";
+const ENDPOINT = "http://localhost:4000";
 var socket, selectedChatCompare;
 
 const ChatWindow = () => {
@@ -147,20 +148,21 @@ const ChatWindow = () => {
                     <span className="loader"></span>
                 ) : (
                 <div className="messages">
-                    <ScrollableChat messages={messages} isTyping={isTyping}/>
-            </div>
+                    <ScrollableChat messages={messages} isTyping={isTyping} />
+                </div>
                 
                 )}
-            </div>
+                            
+                <div className="typingIndicator">
+                {isTyping ? 
+                <div>A message is being written...</div>
+                : <></>}
+                </div>
 
-            <div className="typingIndicator">
-            {isTyping ? 
-            <div>A message is being written...</div>
-            : <></>}
             </div>
 
             <form className="writeMessage" onKeyDown={sendMessage} required>
-                
+
                 <input 
                 placeholder="Write a message..." 
                 onChange={typingHandler}
