@@ -6,7 +6,7 @@ import io from 'socket.io-client';
 import $ from 'jquery';
 
 // const ENDPOINT = "https://chat-socialize.onrender.com/";
-const ENDPOINT = "https://chat-socialize.onrender.com";
+const ENDPOINT = "http://localhost:4000";
 var socket, selectedChatCompare;
 
 const ChatWindow = () => {
